@@ -46,7 +46,18 @@ const Node = ({ node, expanded, toggleNodeExpanded }) => {
         </Box>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <Typography>Blocks go here</Typography>
+        <Box className={classes.allBlocks}>
+          {expanded ? node.blocks.map((block) => (
+            <Box key={block.id} className={classes.blockContent}>
+              <Typography variant="h6" className={classes.blockHead}>
+                {`00${block.attributes.index}`}
+              </Typography>
+              <Typography variant="subtitle2" className={classes.blockSubtitle}>
+                {block.attributes.data}
+              </Typography>
+            </Box>
+          )) : ''}
+        </Box>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
@@ -70,6 +81,30 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
     paddingRight: 20,
+  },
+  allBlocks: {
+    width: "98%",
+  },
+  blockContent: {
+    background: "rgba(0, 0, 0, 0.12)",
+    borderRadius: "2px",
+    marginTop: "4px",
+    padding: "8px",
+    width: "100%",
+  },
+  blockHead: {
+    fontWeight: "bold",
+    fontSize: "10px",
+    lineHeight: "16px",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
+    color: "#304FFE",
+  },
+  blockSubtitle: {
+    fontSize: "14px",
+    lineHeight: "20px",
+    letterSpacing: "0.25px",
+    color: "#263238",
   },
   icon: {
     color: colors.faded,
